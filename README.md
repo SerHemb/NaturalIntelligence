@@ -1,7 +1,8 @@
-- 👋 Hi, I’m Serhii Hembei
-- 👀 I’m interested in Java Selenium automation
-- 🌱 I’m currently learning Selenium Web driver
-- 💞️ I’m looking to collaborate on ...
+- Summer 2023 Automation Bootcamp 
+- 👋 Hi, we are Natural Intelligence team.
+- 👀 We are very interested in Java Selenium automation
+- 🌱 We currently learning Selenium Web driver
+- 💞️ We looking to collaborate on ...
 - 📫 How to reach me ...
 
 <!---

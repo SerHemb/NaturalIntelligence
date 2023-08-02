@@ -1,0 +1,46 @@
+name: Pull Request Test 1
+
+on:
+  pull_request:
+    types: [ opened, edited, synchronize, reopened ]
+
+jobs:
+  check_pr_title:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Fetch all history for all tags and branches
+        run: git fetch --prune --unshallow
+      - name: Check PR title
+        run: |
+          echo "PR title: ${{ github.event.pull_request.title }}"
+          if [[ ! "${{ github.event.pull_request.title }}" =~ ^\[[A-Z0-9-]+\].*$ ]]; then
+            echo "error: invalid PR title"
+            exit 1
+          fi
+
+  ui_tests:
+    needs: check_pr_title
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Set up JDK
+        uses: actions/setup-java@v2
+        with:
+          java-version: '11'
+          distribution: 'adopt'
+
+      - name: Check out code
+        uses: actions/checkout@v2
+
+      - name: Run Pull Request Test
+        run: mvn clean test -Dbrowser=headless
+
+      - name: Upload Cucumber Report
+        uses: actions/upload-artifact@v2
+        with:
+          name: cucumber-report
+          path: target/detailed-report.html

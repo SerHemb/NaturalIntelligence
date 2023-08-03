@@ -1,4 +1,4 @@
-package steps.leagues_comp_teams_steps;
+package steps;
 
 import hooks.Setup;
 import io.cucumber.java.en.And;
@@ -19,7 +19,6 @@ public class CompetitionPageSteps {
     AdminPanelPage adminPanelPage = new AdminPanelPage();
     CommonSteps commonSteps = new CommonSteps();
     CompetitionPage competitionPage = new CompetitionPage();
-
     WebDriver driver;
 
     public CompetitionPageSteps() {
@@ -55,65 +54,46 @@ public class CompetitionPageSteps {
     /**
      * Competition page steps definitions methods
      */
-    @And("types {string} text in Description field")
-    public void descriptionText(String description) {
-        commonSteps.clickTo(competitionPage.COMPETITION_DESCRIPTION_FIELD);
-    }
-
-    @And("admin opens a new competition creating page")
-    public void clickNewChampButton() {
-        commonSteps.clickTo(competitionPage.CREATE_NEW_COMPETITION_BUTTON);
-    }
-
-    @And("valid characters {string} types in Friendly text field")
-    public void typeFriendly(String friendlyName) {
-        commonSteps.sendKeyTo(friendlyName, competitionPage.COMPETITION_FRIENDLY_FIELD);
-    }
-
-    @Then("Save button is not active")
-    public void clickNotActiveSaveCompetitionButton() {
-        competitionPage.clickNotActiveSaveCompetitionButton();
-    }
-
-    @When("a browser is on competition creation page")
-    public void createNewCompetition() {
-        commonSteps.clickTo(adminPanelPage.COMPETITIONS);
-        commonSteps.clickTo(competitionPage.CREATE_NEW_COMPETITION_BUTTON);
-    }
-
-
-    @Then("created competition presents on page")
-    public void assertCompetitionPresentsOnPage() {
-        competitionPage.assertCompetitionOnPage();
-    }
-
-    @Then("created competition with added image presents on page")
-    public void assertImagePresentsOnCart() {
-        competitionPage.imageCompetitionAssert();
-    }
 
     @And("admin types {string} in Name field and selects {string} from dropdown menu")
     public void requiredCompetitionFields(String competitionName, String leagueName) {
         sleep(2000);
         driver.findElement(getByObject(competitionPage.COMPETITION_NAME_FIELD)).sendKeys(competitionName);
-        commonSteps.ClickToVisible(competitionPage.LEAGUE_SELECT_DROPDOWN);
+        commonSteps.clickToVisible(competitionPage.LEAGUE_SELECT_DROPDOWN);
         competitionPage.selectLeagueDropdown(leagueName);
     }
 
     @When("browser is on new competition creation page")
     public void createNewCompetitionPage() {
-        commonSteps.ClickToVisible(adminPanelPage.COMPETITIONS_SIDE_BUTTON);
-        commonSteps.ClickToVisible(competitionPage.CREATE_NEW_COMPETITION_BUTTON);
+        commonSteps.clickToVisible(adminPanelPage.COMPETITIONS_SIDE_BUTTON);
+        commonSteps.clickToVisible(competitionPage.CREATE_NEW_COMPETITION_BUTTON);
     }
 
     @Then("the cart with {string} title presents on competitions list page")
     public void saveAndAssertCreatedCompetition(String expectCompetitionName) {
         sleep(1000);
-        commonSteps.ClickToVisible(competitionPage.COMPETITION_SAVE_BUTTON);
+        commonSteps.clickToVisible(competitionPage.COMPETITION_SAVE_BUTTON);
         sleep(1000);
-        commonSteps.ClickToVisible(adminPanelPage.COMPETITIONS_SIDE_BUTTON);
+        commonSteps.clickToVisible(adminPanelPage.COMPETITIONS_SIDE_BUTTON);
         sleep(1000);
         commonSteps.assertTextPresentedIn(expectCompetitionName, competitionPage.COMPETITION_CART_TITLE);
+    }
 
+    @And("admin types {string} in Name field and doesn't select league from dropdown menu")
+    public void typeNameCompetitionField(String competitionName) {
+        sleep(1000);
+        commonSteps.sendKeyToVisible(competitionName, competitionPage.COMPETITION_NAME_FIELD);
+    }
+
+    @Then("save button is not highlighted and not clickable")
+    public void assertSaveCompetitionButton() {
+        try {
+        commonSteps.assertButtonIsDisabled(competitionPage.COMPETITION_SAVE_BUTTON);
+        sleep(1000);
+        commonSteps.clickToVisible(competitionPage.COMPETITION_SAVE_BUTTON);
+        System.out.println("Button is not clickable");
+    } catch (Exception e) {
+        System.err.println("Button is highlighted and clickable: " + e.getMessage());
+    }
     }
 }

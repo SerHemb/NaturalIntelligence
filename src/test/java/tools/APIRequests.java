@@ -24,7 +24,6 @@ public class APIRequests {
      *
      * @param leagueName
      */
-
     public void requestToLeagueCreateAPI (String leagueName) {
         OkHttpClient client = new OkHttpClient();
         // Create JSON request body

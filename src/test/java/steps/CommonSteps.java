@@ -90,7 +90,7 @@ public class CommonSteps {
     }
 
     @When("wait when element {string} visible and click")
-    public void ClickToVisible(String target) {
+    public void clickToVisible(String target) {
         try {
             wait.until(ExpectedConditions.visibilityOfElementLocated(getByObject(target)));
             driver.findElement(getByObject(target)).click();

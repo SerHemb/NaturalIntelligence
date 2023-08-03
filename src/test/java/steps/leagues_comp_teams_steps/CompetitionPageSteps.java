@@ -94,16 +94,26 @@ public class CompetitionPageSteps {
 
     @And("admin types {string} in Name field and selects {string} from dropdown menu")
     public void requiredCompetitionFields(String competitionName, String leagueName) {
-        sleep(1000);
+        sleep(2000);
         driver.findElement(getByObject(competitionPage.COMPETITION_NAME_FIELD)).sendKeys(competitionName);
-
-        commonSteps.waitAndClick(competitionPage.LEAGUE_SELECT_DROPDOWN);
-        competitionPage.selectLeagueDropdown( leagueName);
+        commonSteps.ClickToVisible(competitionPage.LEAGUE_SELECT_DROPDOWN);
+        competitionPage.selectLeagueDropdown(leagueName);
     }
 
     @When("browser is on new competition creation page")
     public void createNewCompetitionPage() {
-        commonSteps.waitAndClick(adminPanelPage.COMPETITIONS_SIDE_BUTTON);
-        commonSteps.waitAndClick(competitionPage.CREATE_NEW_COMPETITION_BUTTON);
+        commonSteps.ClickToVisible(adminPanelPage.COMPETITIONS_SIDE_BUTTON);
+        commonSteps.ClickToVisible(competitionPage.CREATE_NEW_COMPETITION_BUTTON);
+    }
+
+    @Then("the cart with {string} title presents on competitions list page")
+    public void saveAndAssertCreatedCompetition(String expectCompetitionName) {
+        sleep(1000);
+        commonSteps.ClickToVisible(competitionPage.COMPETITION_SAVE_BUTTON);
+        sleep(1000);
+        commonSteps.ClickToVisible(adminPanelPage.COMPETITIONS_SIDE_BUTTON);
+        sleep(1000);
+        commonSteps.assertTextPresentedIn(expectCompetitionName, competitionPage.COMPETITION_CART_TITLE);
+
     }
 }

@@ -37,6 +37,7 @@ public class CompetitionPage extends BasePage {
     public final String COMPETITION_IMAGE_UPLOAD = "xpath=//input[@type='file'][1]";
     public final String COMPETITION_IMAGE_PATH = "/src/test/resources/files/image.png";
     public final String COMPETITION_SAVE_BUTTON = "xpath=//button[text()='Save']";
+    public String COMPETITION_CART_TITLE = "xpath=//div[@class='ChampsCardList_name__p6d40']";
     public String competitionCartNameVerify = "xpath=//div[@class='SportEntityCard_card__SQ6lG'][position()=1]/a/div[3]";
     public String competitionCartImage = "xpath=//div[@class='SportEntityCard_card__SQ6lG'][position()=1]/a/div/div/img";
 
@@ -45,7 +46,9 @@ public class CompetitionPage extends BasePage {
      */
 
     public void selectLeagueDropdown(String leagueName) {
-        commonSteps.clickTo(String.valueOf(driver.findElement(By.xpath("//li[text()='" + leagueName + "']"))));
+        sleep(1000);
+        WebElement dropdownList = driver.findElement(By.xpath("//li[text()='" + leagueName + "']"));
+        dropdownList.click();
     }
 
     public void clickNotActiveSaveCompetitionButton() {

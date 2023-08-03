@@ -9,7 +9,7 @@ public class AdminPanelPage extends BasePage {
      * Admin page web elements variables
      */
     public static final String LEAGUES_SIDE_BUTTON = "xpath=//span[normalize-space()='Leagues']";
-    public static final String COMPETITIONS_SIDE_BUTTON = "xpath=//span[normalize-space()='Competitions']";
+    public String COMPETITIONS_SIDE_BUTTON = "xpath=//span[normalize-space()='Competitions']";
     public static final String TEAMS_SIDE_BUTTON = "xpath=//span[normalize-space()='Teams']";
     public static final String PLAYERS_SIDE_BUTTON = "xpath=//span[normalize-space()='Players']";
     public static final String MATCHES_SIDE_BUTTON = "xpath=//span[normalize-space()='Matches']";

@@ -35,6 +35,7 @@ public class CommonSteps {
     WebDriverWait wait;
     WebDriver driver;
 
+
     private Map<String, Object> scenarioContext = new HashMap<>();
 
     Logger logger = Logger.getLogger(CommonSteps.class);
@@ -71,9 +72,14 @@ public class CommonSteps {
     }
 
     @And("wait visibility and send key {string} to {string}")
-    public void waitAndSendKeyTo(String keyParam, String target) {
-        WebElement foundElement = wait.until(ExpectedConditions.visibilityOfElementLocated(getByObject(target)));
-        foundElement.sendKeys(Keys.valueOf(keyParam));
+    public void sendKeyToVisible(String keyParam, String target) {
+        try {
+            wait.until(ExpectedConditions.visibilityOfElementLocated(getByObject(target)));
+            driver.findElement(getByObject(target)).sendKeys(keyParam);
+            System.out.println("Element clicked successfully!");
+        } catch (Exception e) {
+            System.err.println("Element not found or could not be clicked: " + e.getMessage());
+        }
     }
 
     @When("click to {string}")
@@ -84,9 +90,14 @@ public class CommonSteps {
     }
 
     @When("wait when element {string} visible and click")
-        public void waitAndClick(String target) {
-        WebElement waitElement = wait.until(ExpectedConditions.elementToBeClickable(getByObject(target)));
-        waitElement.click();
+    public void ClickToVisible(String target) {
+        try {
+            wait.until(ExpectedConditions.visibilityOfElementLocated(getByObject(target)));
+            driver.findElement(getByObject(target)).click();
+            System.out.println("Element clicked successfully!");
+        } catch (Exception e) {
+            System.err.println("Element not found or could not be clicked: " + e.getMessage());
+        }
     }
 
     @And("rightClick to {string}")

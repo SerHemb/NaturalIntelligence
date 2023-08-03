@@ -70,11 +70,23 @@ public class CommonSteps {
         foundElement.sendKeys(Keys.valueOf(keyParam));
     }
 
+    @And("wait visibility and send key {string} to {string}")
+    public void waitAndSendKeyTo(String keyParam, String target) {
+        WebElement foundElement = wait.until(ExpectedConditions.visibilityOfElementLocated(getByObject(target)));
+        foundElement.sendKeys(Keys.valueOf(keyParam));
+    }
+
     @When("click to {string}")
     public void clickTo(String target) {
         sleep(1000);
         WebElement foundElement = driver.findElement(getByObject(target));
         foundElement.click();
+    }
+
+    @When("wait when element {string} visible and click")
+        public void waitAndClick(String target) {
+        WebElement waitElement = wait.until(ExpectedConditions.elementToBeClickable(getByObject(target)));
+        waitElement.click();
     }
 
     @And("rightClick to {string}")

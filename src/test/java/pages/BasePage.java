@@ -16,6 +16,7 @@ public class BasePage {
 
     public BasePage() {
         this.driver = Setup.driver;
+        this.driver.manage().window().maximize();
         this.wait = new Wait(this.driver);
         context = new HashMap<>();
         steps = new CommonSteps();

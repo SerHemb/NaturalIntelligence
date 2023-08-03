@@ -15,6 +15,9 @@ Feature: competition creating
 
 
 
+
+
+
     Scenario: Admin clicks on Save button on competition creating page when one required field is blank
       Given user logs in as "iserhiy888@gmail.com" "Parol123"
       When browser is on new competition creation page

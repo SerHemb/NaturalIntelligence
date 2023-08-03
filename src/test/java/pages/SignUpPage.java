@@ -39,7 +39,6 @@ public class SignUpPage extends BasePage {
     }
 
 
-    public String generateEMailID() {
     public static String generateEMailID() {
         String domain = EMAIL_ID_VALUE.split("@")[1];
         EMAIL_ID_VALUE = USERNAME_VALUE + "@" + domain;

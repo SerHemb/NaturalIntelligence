@@ -28,17 +28,17 @@ public class Setup {
 
         switch (browser) {
             case "chrome":
-                System.setProperty("webdriver.chrome.driver", "src/test/resources/drivers/chromedriver");
+                System.setProperty("webdriver.chrome.driver", "/home/hembei/Selenium/chromedriver");
                 ChromeOptions options = new ChromeOptions();
                 options.setPageLoadStrategy(PageLoadStrategy.EAGER);
-                options.addArguments("--remote-allow-origins=*");
+                /*options.addArguments("--remote-allow-origins=*");
                 options.addArguments("--disable-network-throttling");
                 options.addArguments("--blink-settings=imagesEnabled=false");
                 options.addArguments("--no-sandbox");
                 options.addArguments("--remote-debugging-port=9222");
                 options.addArguments("--disable-features=NetworkService");
                 options.addArguments("--dns-prefetch-disable");
-                options.addArguments("--disable-extensions");
+                options.addArguments("--disable-extensions");*/
                 //options.addArguments("--headless");
                 driver = new ChromeDriver(options);
                 break;

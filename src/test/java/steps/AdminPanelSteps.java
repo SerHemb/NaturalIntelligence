@@ -1,6 +1,7 @@
 package steps;
 
 import io.cucumber.java.en.When;
+import org.openqa.selenium.support.FindBy;
 import pages.AdminPanelPage;
 import pages.PlayersPage;
 

@@ -46,33 +46,8 @@ public class CompetitionPage extends BasePage {
      */
 
     public void selectLeagueDropdown(String leagueName) {
-        sleep(1000);
-        WebElement dropdownList = driver.findElement(By.xpath("//li[text()='" + leagueName + "']"));
-        dropdownList.click();
+
     }
 
-    public void clickNotActiveSaveCompetitionButton() {
-        WebElement saveActive = driver.findElement(getByObject(COMPETITION_SAVE_BUTTON));
-        boolean isActive = saveActive.isEnabled();
-        Assert.assertFalse("Button is active", isActive);
-    }
-    public void assertCompetitionOnPage() {
-        sleep(1000);
-        driver.findElement(getByObject(COMPETITION_SAVE_BUTTON)).click();
-        sleep(1000);
-        commonSteps.clickTo(adminPage.COMPETITIONS);
-        sleep(2000);
-        String actualCompOnPageList = driver.findElement(getByObject(competitionCartNameVerify)).getAttribute("innerText");
-        Assert.assertEquals(actualCompOnPageList, competitionStoredName);
-    }
 
-    public void imageCompetitionAssert() {
-        sleep(1000);
-        driver.findElement(getByObject(COMPETITION_SAVE_BUTTON)).click();
-        sleep(1000);
-        commonSteps.clickTo(adminPage.COMPETITIONS);
-        sleep(1000);
-        WebElement image = driver.findElement(getByObject(competitionCartImage));
-        assertTrue(image.isDisplayed());
-    }
 }

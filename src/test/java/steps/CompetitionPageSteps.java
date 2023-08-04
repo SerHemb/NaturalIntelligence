@@ -94,6 +94,7 @@ public class CompetitionPageSteps {
         System.out.println("Button is not clickable");
     } catch (Exception e) {
         System.err.println("Button is highlighted and clickable: " + e.getMessage());
+        }
     }
-    }
+
 }

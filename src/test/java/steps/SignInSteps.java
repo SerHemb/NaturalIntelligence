@@ -1,6 +1,7 @@
 package steps;
 
 import io.cucumber.java.en.Given;
+import org.openqa.selenium.WebDriver;
 import pages.SignInPage;
 
 public class SignInSteps {

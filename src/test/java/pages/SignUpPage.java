@@ -43,6 +43,7 @@ public class SignUpPage extends BasePage {
         String domain = EMAIL_ID_VALUE.split("@")[1];
         EMAIL_ID_VALUE = USERNAME_VALUE + "@" + domain;
         return EMAIL_ID_VALUE;
+    }
 
 
     public void submit() {

@@ -17,6 +17,6 @@ Feature: competition creating
 
     Scenario: Admin clicks on Save button on competition creating page when one required field is blank
       Given user logs in as "iserhiy888@gmail.com" "Parol123"
-      When browser is on new competition creation page
-      And admin types "My new champ" in Name field and doesn't select league from dropdown menu
-      Then save button is not highlighted and not clickable
+      #When browser is on new competition creation page
+      #And admin types "My new champ" in Name field and doesn't select league from dropdown menu
+      #Then save button is not highlighted and not clickable

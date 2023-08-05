@@ -1,4 +1,4 @@
-package pages;
+package pages.Tokens;
 
 import io.cucumber.java.AfterAll;
 import io.cucumber.java.BeforeAll;

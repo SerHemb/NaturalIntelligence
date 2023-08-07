@@ -4,9 +4,7 @@ import hooks.Setup;
 import hooks.Wait;
 import org.openqa.selenium.WebDriver;
 import steps.CommonSteps;
-
 import java.util.HashMap;
-
 public class BasePage {
 
     protected WebDriver driver;

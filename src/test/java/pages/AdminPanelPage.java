@@ -14,6 +14,7 @@ public class AdminPanelPage extends BasePage {
     public static final String PLAYERS_SIDE_BUTTON = "xpath=//span[normalize-space()='Players']";
     public static final String MATCHES_SIDE_BUTTON = "xpath=//span[normalize-space()='Matches']";
     // from LOGO --> SEARCH FIELD
+    public static final String HEADER = "xpath=//header[@class='MainLayoutHeaderContainer_wrapper__sTStD']";
     public static final String LOGO = "xpath=//div[@class='MainLayoutHeaderContainer_logo-wrapper__T1rOJ']";
     public static final String LANGUAGE_DROPDOWN = "xpath=//div[@class='MainLayoutHeaderContainer_lang__HUVut']";
     public static final String ENG_LANG = "xpath=xpath=//div[text()='English']";

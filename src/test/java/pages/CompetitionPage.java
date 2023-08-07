@@ -1,23 +1,23 @@
 package pages;
 
-import org.junit.Assert;
+import org.checkerframework.checker.units.qual.C;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import steps.CommonSteps;
 import tools.APIRequests;
+import tools.CommonTools;
+import static pages.AdminPanelPage.HEADER;
 import java.time.Duration;
 import java.util.UUID;
-import static org.junit.Assert.assertTrue;
-import static tools.CommonTools.getByObject;
 import static tools.CommonTools.sleep;
+import static tools.CommonTools.getByObject;
 
 public class CompetitionPage extends BasePage {
-    private final Duration DEFAULT_WAIT_TIMEOUT = Duration.ofSeconds(25);
-
-    APIRequests apiRequests = new APIRequests();
-    AdminPanelPage adminPage = new AdminPanelPage();
     CommonSteps commonSteps = new CommonSteps();
-    private String competitionStoredName;
+    private final Duration DEFAULT_WAIT_TIMEOUT = Duration.ofSeconds(25);
+    WebDriverWait wait;
 
     UUID uuid = UUID.randomUUID();
     String uuidString = uuid.toString().substring(0, 5);
@@ -46,8 +46,7 @@ public class CompetitionPage extends BasePage {
      */
 
     public void selectLeagueDropdown(String leagueName) {
-
+        WebElement dropdownList = driver.findElement(By.xpath("//li[text()='" + leagueName + "']"));
+        dropdownList.click();
     }
-
-
 }

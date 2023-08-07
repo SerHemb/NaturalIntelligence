@@ -4,21 +4,25 @@ import okhttp3.*;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.devtools.DevTools;
+import org.openqa.selenium.devtools.v85.network.Network;
+import pages.BasePage;
 import java.io.IOException;
-import java.util.UUID;
+import java.util.Optional;
+import org.apache.log4j.Logger;
 
-public class APIRequests {
+public class APIRequests extends BasePage {
+    Logger logger = Logger.getLogger(APIRequests.class);
+
     public String FIFA_ID = "85858cf4-2448-44d5-8ba1-f86f27c6eb0f";
     public String SOCCER_ID = "05684792-9662-4e9f-a163-8545e5736c3d";
     public String BASKETBALL_ID = "6240f178-4735-4435-8b86-d7d7ca1b556b";
     public String ICE_HOCKEY_ID = "f6e5590a-4544-4541-b6d0-c5f3be1bd752";
     public String TENNIS_ID = "4cf5fdc6-3b69-454a-8f4b-58bf88e18d51";
-
     public String champID;
     public String leagueID;
-    public String token = "BearerBear eyJhbGciOiJSUzI1NiIsImtpZCI6IjJDMkMxMjNEODEyRUEwMkUxNjgwMDk3MTdFMTQ2QUI1MTQ5MUY4MzhSUzI1NiIsInR5cCI6IkpXVCIsIng1dCI6IkxDd1NQWUV1b0M0V2dBbHhmaFJxdFJTUi1EZyJ9.eyJuYmYiOjE2OTA5OTI5NTUsImV4cCI6MTY5MTAzNjE1NSwiaXNzIjoiaHR0cHM6Ly9kZXYuZWFzeWNoYW1wLmNvbS9zYy1zZWN1cml0eS1hcGkiLCJhdWQiOlsic2Mtc3RhbmRpbmdzLWFwaSIsInNjLXNlY3VyaXR5LWFwaSJdLCJjbGllbnRfaWQiOiJzYy13ZWItdWkiLCJzdWIiOiIyMDRiY2NjMi0zYjZkLTQ1NzUtODYyMC1kODVlODg1ZmE5ZDgiLCJhdXRoX3RpbWUiOjE2OTA5OTI5NTQsImlkcCI6ImxvY2FsIiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvZW1haWxhZGRyZXNzIjoiaXNlcmhpeTg4OEBnbWFpbC5jb20iLCJBc3BOZXQuSWRlbnRpdHkuU2VjdXJpdHlTdGFtcCI6IjdMRjc3QVpKR0gyQ0RHS09ZWFhPWVQ3Qkk0TkJEUTJPIiwicm9sZSI6IlVzZXIiLCJQZXJtaXNzaW9uIjpbIkNoYW1wTGVhZ3VlQ3JlYXRlIiwiUmVmZXJlZU1hbmFnZSIsIk5ld3NNYW5hZ2UiLCJGaXh0dXJlQ3JlYXRlIiwiVGVhbUNyZWF0ZSIsIlZlbnVlTWFuYWdlIl0sInByZWZlcnJlZF91c2VybmFtZSI6ImlzZXJoaXk4ODgiLCJuYW1lIjoiaXNlcmhpeTg4OCIsImVtYWlsIjoiaXNlcmhpeTg4OEBnbWFpbC5jb20iLCJlbWFpbF92ZXJpZmllZCI6dHJ1ZSwiZnVsbE5hbWUiOiJTZXJoaWkgSGVtYmVpIiwiZm9yY2VQYXNzd29yZENoYW5nZSI6IkZhbHNlIiwiZXh0ZXJuYWxVc2VyIjoidHJ1ZSIsImdlbmRlciI6IiIsImxvY2FsZSI6ImVuIiwianRpIjoiODg0RkYxNUEwRDE3QUM3QjI0OURCRDQwOEJBM0JGRDEiLCJzaWQiOiI0MThDRTI4NjEyNzMxM0ZBMUI2MEYzOEVCMUY3REFDOSIsImlhdCI6MTY5MDk5Mjk1NSwic2NvcGUiOlsib3BlbmlkIiwicHJvZmlsZSIsImVtYWlsIiwic2Mtc3RhbmRpbmdzLWFwaSIsInNjLXNlY3VyaXR5LWFwaSIsIm9mZmxpbmVfYWNjZXNzIl0sImFtciI6WyJwd2QiXX0.SKw27Ld3Gx67BIx1UVLkw_5mi0ETh4sR61PFmYy0LJui1_c1wEU5-0wOM1OOVAq6Lfwjpo3dGCDkDfpSUKlBD7sEfttInXwCy7kVQ5dB2KGxPnbsZ9rB0jWiP2De-PJRcJafwS2ES7JJgB-0XgZfO-P7C06JLdmUULnu8eAfSuuQ-zVKgdnyUrqdQWRPEOGaJXjSCGZ6IfW56C1i_UGA6PAT6EcemM-N_eHADJ0lW1O_SJN0BI7lw0alIC4Zbmy16Pm2rz5Z_Bm1in_Guh61mAzoDVh5jtORHPS4CdO-xRVhhj3zfUs14XvAcNfzDhOzXekyvVaJMkliPsnEz51ndA";
-
+    private String bearerToken;
 
     /** API request for league creating
      *
@@ -26,6 +30,7 @@ public class APIRequests {
      */
     public void requestToLeagueCreateAPI (String leagueName) {
         OkHttpClient client = new OkHttpClient();
+
         // Create JSON request body
         MediaType mediaType = MediaType.parse("application/json");
         JSONObject requestBody = new JSONObject();
@@ -48,23 +53,23 @@ public class APIRequests {
                 .url("https://dev.easychamp.com/sc-standings-api/champ-leagues/")
                 .post(body)
                 .addHeader("Content-Type", "application/json")
-                .addHeader("Authorization", token)
+                .addHeader("Authorization", bearerToken)
                 .build();
         // Send the request and handle the response
         try {
             Response response = client.newCall(request).execute();
             if (response.isSuccessful()) {
-                System.out.println("League creation successful");
+                logger.info("League creation successful");
                 ResponseBody responseBody = response.body();
                 if (responseBody != null) {
                     String responseJson = responseBody.string();
                     // Extract the ID from the response JSON
                     JSONObject jsonResponse = new JSONObject(responseJson);
                     leagueID = jsonResponse.getString("id");
-                    System.out.println("League ID: " + leagueID);
+                    logger.info("League ID: " + leagueID);
                 }
             } else {
-                System.out.println("League creation failed with status code: " + response.code());
+                logger.info("League creation failed with status code: " + response.code());
             }
         } catch (IOException | JSONException e) {
             e.printStackTrace();
@@ -85,19 +90,19 @@ public class APIRequests {
                 .url("https://dev.easychamp.com/sc-standings-api/champ-leagues/" + leagueID)
                 .delete(body)
                 .addHeader("Content-Type", "application/json")
-                .addHeader("Authorization", token)
+                .addHeader("Authorization", bearerToken)
                 .build();
         // Send the request and handle the response
         try {
             Response response = client.newCall(request).execute();
             if (response.isSuccessful()) {
-                System.out.println("League deleting successful");
+                logger.info("League and all Competitions related with league deleted successful");
                 ResponseBody responseBody = response.body();
                 if (responseBody != null) {
                     String responseJson = responseBody.string();
                 }
             } else {
-                System.out.println("League deleting failed with status code: " + response.code());
+                logger.info("League deleting failed with status code: " + response.code());
             }
         } catch (IOException | JSONException e) {
             e.printStackTrace();
@@ -166,13 +171,13 @@ public class APIRequests {
                 .url("https://dev.easychamp.com/sc-standings-api/champs/")
                 .post(body)
                 .addHeader("Content-Type", "application/json")
-                .addHeader("Authorization", token)
+                .addHeader("Authorization", bearerToken)
                 .build();
         // Send the request and handle the response
         try {
             Response response = client.newCall(request).execute();
             if (response.isSuccessful()) {
-                System.out.println("Championship creation successful");
+                logger.info("Championship creation successful.........");
                 ResponseBody responseBody = response.body();
                 if (responseBody != null) {
                     String responseJson = responseBody.string();
@@ -180,13 +185,42 @@ public class APIRequests {
                     JSONObject jsonResponse = new JSONObject(responseJson);
                     String id = jsonResponse.getString("id");
                     champID = id;
-                    System.out.println("Championship ID: " + id);
+                    logger.info("Championship ID: " + id);
                 }
             } else {
-                System.out.println("Champ creation failed with status code: " + response.code());
+                logger.info("Champ creation failed with status code: " + response.code());
             }
         } catch (IOException | JSONException e) {
             e.printStackTrace();
         }
+    }
+
+    /**
+     * extracting Authorization Bearer token from Chrome devtools Network logs
+     * @return
+     */
+    public String gettingBearerToken() {
+
+        DevTools devTools = ((ChromeDriver) driver).getDevTools();
+        devTools.createSession();
+        devTools.send(Network.enable(
+                Optional.empty(),
+                Optional.empty(),
+                Optional.empty()));
+
+        devTools.addListener(Network.requestWillBeSent(), request -> {
+            org.openqa.selenium.devtools.v85.network.model.Request response = request.getRequest();
+            if (response.getUrl().contains("https://dev.easychamp.com/sc-standings-api/sport-types/leagues")) {
+                String bearerToken = response.getHeaders().get("Authorization").toString();
+                if (bearerToken != null && bearerToken.startsWith("Bearer ")) {
+                    this.bearerToken = bearerToken;
+                    logger.info("Bearer token: " + bearerToken);
+                } else {
+                    logger.info("Authorisation Bearer Token not found.");
+                }
+
+            }
+        });
+        return bearerToken;
     }
 }

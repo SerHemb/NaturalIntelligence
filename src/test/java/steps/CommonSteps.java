@@ -12,19 +12,19 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import tools.APIRequestTools;
-
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.time.Duration;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.UUID;
 
+import java.util.UUID;
 import static org.junit.Assert.*;
 import static tools.CommonTools.getByObject;
 import static tools.CommonTools.sleep;
@@ -71,33 +71,11 @@ public class CommonSteps {
         foundElement.sendKeys(Keys.valueOf(keyParam));
     }
 
-    @And("wait visibility and send key {string} to {string}")
-    public void sendKeyToVisible(String keyParam, String target) {
-        try {
-            wait.until(ExpectedConditions.visibilityOfElementLocated(getByObject(target)));
-            driver.findElement(getByObject(target)).sendKeys(keyParam);
-            System.out.println("Element clicked successfully!");
-        } catch (Exception e) {
-            System.err.println("Element not found or could not be clicked: " + e.getMessage());
-        }
-    }
-
     @When("click to {string}")
     public void clickTo(String target) {
         sleep(1000);
         WebElement foundElement = driver.findElement(getByObject(target));
         foundElement.click();
-    }
-
-    @When("wait when element {string} visible and click")
-    public void clickToVisible(String target) {
-        try {
-            wait.until(ExpectedConditions.visibilityOfElementLocated(getByObject(target)));
-            driver.findElement(getByObject(target)).click();
-            System.out.println("Element clicked successfully!");
-        } catch (Exception e) {
-            System.err.println("Element not found or could not be clicked: " + e.getMessage());
-        }
     }
 
     @And("rightClick to {string}")
@@ -106,7 +84,6 @@ public class CommonSteps {
         WebElement foundElement = driver.findElement(getByObject(target));
         action.contextClick(foundElement).perform();
     }
-
 
     @And("click to {string} {int} times")
     public void clickToTimes(String locator, int times) {

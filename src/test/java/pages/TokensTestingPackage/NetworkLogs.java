@@ -1,4 +1,4 @@
-package pages.Tokens;
+package pages.TokensTestingPackage;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.junit.jupiter.api.Test;
@@ -12,7 +12,6 @@ import org.openqa.selenium.devtools.v85.network.model.Request;
 import org.apache.log4j.Logger;
 
 import java.util.Optional;
-import static org.openqa.selenium.devtools.v85.network.Network.responseReceived;
 
 public class NetworkLogs {
 

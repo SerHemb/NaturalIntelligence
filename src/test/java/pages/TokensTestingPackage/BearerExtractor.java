@@ -1,10 +1,10 @@
-package pages.Tokens;
+package pages.TokensTestingPackage;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import static pages.Tokens.NetworkLogs.bearerToken;
+import static pages.TokensTestingPackage.NetworkLogs.bearerToken;
 public class BearerExtractor {
     public static void bearerFinder() {
         String pattern = "Bearer\\s([^,]+),";

@@ -1,15 +1,11 @@
-package pages.Tokens;
+package pages.TokensTestingPackage;
 
 import io.cucumber.java.AfterAll;
 import io.cucumber.java.BeforeAll;
-import io.github.bonigarcia.wdm.WebDriverManager;
-import lombok.SneakyThrows;
-import net.lightbody.bmp.BrowserMobProxy;
 import net.lightbody.bmp.BrowserMobProxyServer;
 import net.lightbody.bmp.client.ClientUtil;
 import net.lightbody.bmp.core.har.Har;
 import net.lightbody.bmp.proxy.CaptureType;
-import org.junit.After;
 import org.junit.Test;
 import org.openqa.selenium.Proxy;
 import org.openqa.selenium.WebDriver;
@@ -17,15 +13,11 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
-import org.openqa.selenium.remote.RemoteWebDriver;
 
 import java.io.File;
 import java.io.IOException;
 import java.net.Inet4Address;
 import java.net.UnknownHostException;
-import java.util.EnumSet;
-
-import static tools.CommonTools.sleep;
 
 public class generateHARV2 {
     WebDriver             driver;

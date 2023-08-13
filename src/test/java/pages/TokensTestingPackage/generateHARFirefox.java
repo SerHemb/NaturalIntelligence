@@ -1,15 +1,13 @@
-package pages.Tokens;
+package pages.TokensTestingPackage;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.EnumSet;
 
-import lombok.val;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.Proxy;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
@@ -20,8 +18,9 @@ import net.lightbody.bmp.BrowserMobProxy;
 import net.lightbody.bmp.BrowserMobProxyServer;
 import net.lightbody.bmp.core.har.Har;
 import net.lightbody.bmp.proxy.CaptureType;
+import pages.BasePage;
 
-public class generateHAR {
+public class generateHARFirefox extends BasePage {
 
 	@Test
 	public void generateHARFile() throws InterruptedException, IOException {
@@ -57,10 +56,11 @@ public class generateHAR {
 
 		//7. Start browser and open URL
 
-		WebDriverManager.chromedriver().setup();
-		ChromeOptions options=new ChromeOptions();
+		WebDriverManager.firefoxdriver().setup();
+
+		FirefoxOptions options = new FirefoxOptions();
 		options.merge(capability);
-		WebDriver driver=new ChromeDriver(options);
+		WebDriver driver = new FirefoxDriver(options);
 
 		//Print Driver Capabilities
 		System.out.println("Driver Capabilities===> \n" +((RemoteWebDriver)driver).getCapabilities().asMap().toString());
